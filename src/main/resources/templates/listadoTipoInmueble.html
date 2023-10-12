@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="~{layout}"> 
+
+    <body layout:fragment="body">
+
+        <div class="container">
+            <h1>Lista de Tipos de inmuebles</h1>
+            <form th:action="@{/tipoinmueble/listado}" method="post"></form>
+            <div class="row">
+                <a th:href="@{/tipoinmueble/form/{idtipoinmueble}(idtipoinmueble=0)}" class="btn btn-success">Agregar</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Eliminar</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Actualizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tipoinmueble: ${tipoinmuebles}">
+                        <td>
+                            <a th:href="@{/tipoinmueble/delete/{id}(id=${tipoinmueble.idtipoinmueble})}"  type="button" class="btn btn-danger">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                        <td th:text="${tipoinmueble.idtipoinmueble}"></td>
+                        <td th:text="${tipoinmueble.nombre}"></td>
+                        <td>
+                            <a th:href="@{/tipoinmueble/form/{idtipoinmueble}(idtipoinmueble=${tipoinmueble.idtipoinmueble})}" class="btn btn-warning">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </body>
+</html>

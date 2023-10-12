@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layaout"
+      layout:decorate="~{layout}"> 
+
+    <body layout:fragment="body">
+
+        <div class="container">
+            <h1>Lista de servicios</h1>
+            <form th:action="@{/servicio/listado}" method="post"></form>
+            <div class="row">
+                <a th:href="@{/servicio/form/{idservicio}(idservicio=0)}" class="btn btn-success">Agregar</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Eliminar</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Actualizar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="servicio: ${servicios}">
+                        <td>
+                            <a th:href="@{/servicio/delete/{id}(id=${servicio.idservicio})}"  type="button" class="btn btn-danger">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                        
+                        <td th:text="${servicio.idservicio}"></td>
+                        <td th:text="${servicio.nombre}"></td>
+                        <td>
+                            <a th:href="@{/servicio/form/{idservicio}(idservicio=${servicio.idservicio})}" class="btn btn-warning">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </body>
+</html>
